@@ -1,17 +1,28 @@
-// const Router = ReactRouterDOM.HashRouter
-// const { Routes, Route } = ReactRouterDOM
+import { BrowserRouter as Router } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 
-import { IndexToy } from '../public/pages/IndexToy'
+import { ToyIndex } from '../pages/ToyIndex.jsx'
+import { ToyDetails } from '../pages/ToyDetails.jsx'
+import { ToyEdit } from '../pages/ToyEdit.jsx'
 
 export function App() {
+  return (
+ 
+ <Router>
   
-  return <IndexToy />
+  <section>
+  <Routes>
+    <Route path='/toy' element={<ToyIndex />} />
+    <Route path='/toy/edit/:toyId'element={<ToyEdit />} />
+    <Route path='/toy/:toyId' element={<ToyDetails />} />
+  </Routes>
+  </section>
   
+  </Router>
+  
+)
 }
 
 
