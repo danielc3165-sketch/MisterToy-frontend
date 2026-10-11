@@ -5,6 +5,7 @@ import { utilService} from "./util.service.js"
 export const toyService = {
     query,
     getById,
+    save,
 }
 
 const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 
