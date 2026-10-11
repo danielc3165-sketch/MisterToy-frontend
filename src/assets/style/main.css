@@ -9,5 +9,6 @@
 @import 'base/forms.css';
 
 /* components */
-@import 'cmps/ToyList.css';
 @import 'cmps/ToyIndex.css';
+@import 'cmps/ToyList.css';
+@import 'cmps/ToyDetails.css';

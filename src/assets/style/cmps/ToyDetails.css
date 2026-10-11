@@ -1,0 +1,6 @@
+.toy-details {
+    display: grid;
+    justify-items: left;
+    width: 50%;
+    padding-inline-start: 2em;
+}
