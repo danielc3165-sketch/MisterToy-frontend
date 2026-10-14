@@ -1,0 +1,14 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-inline: 2em;
+
+    background-color: var(--gray1);
+}
+
+.header-links{
+    display: flex;
+    gap:1em;
+}
