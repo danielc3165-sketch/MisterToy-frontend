@@ -6,6 +6,7 @@ export const toyService = {
     query,
     getById,
     save,
+    getEmptyToy,
 }
 
 const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 
@@ -98,19 +99,28 @@ function save(toy) {
         return storageService.put(STORAGE_KEY, toy)
     } else {
         // when switching to backend - remove the next line
-       //toy.owner = userService.getLoggedinUser()
+        //toy.owner = userService.getLoggedinUser()
+        toy.createdAt = Date.now()
         return storageService.post(STORAGE_KEY, toy)
     }
 }
 
-function getEmptyCar() {
-    return {
-        vendor: '',
-        price: '',
-        speed: '',
-    }
+function getEmptyToy(){
+    return { 
+imgUrl: 'hardcoded-url-for-now', 
+labels: _getToyLabels(), 
+inStock:utilService.getRandomIntInclusive(1, 2) === 1 ? true :false 
+}
 }
 
+function _getToyLabels(){
+    
+    const idx1 = utilService.getRandomIntInclusive(0, 3)
+    const idx2 = utilService.getRandomIntInclusive(4, 7)
+
+    return [labels[idx1],labels[idx2]]
+}
+    
 function getRandomCar() {
     return {
         vendor: 'Susita-' + (Date.now() % 1000),

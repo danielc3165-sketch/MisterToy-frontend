@@ -6,16 +6,18 @@ import { saveToy } from "../store/actions/toy.action"
 
 import { toyService } from "../services/toy.service.local"
 
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 
 export function ToyEdit(){
     
-    const [ toy,setToy ] = useState({})
+    const [ toy,setToy ] = useState(toyService.getEmptyToy())
     const [ details,setDetails ] = useState({})
     
     const { toyId } = useParams()
     const navigate = useNavigate()
     
         useEffect(()=>{
+            console.log('toy',toy)
           if(toyId) loadToy(toyId)
         },[])
     
@@ -26,17 +28,18 @@ export function ToyEdit(){
     
         function onSubmit(ev){
             ev.preventDefault()
-            if(!toy) return
+            if(!toy) return 
+            if(!details.name) return (alert('must have name'))
             toy.name=details.name
-            toy.price=details.price
+            toy.price=details.price || 0
             saveToy(toy)  
             .then(() => {
-                //showSuccessMsg('toy Saved!')
+                showSuccessMsg('Toy Update!')
                 navigate('/toy')
             })
             .catch(err => {
                 console.log('Had issues in toy details', err)
-                //showErrorMsg('Had issues in car details')  
+                showErrorMsg('Had issues in car details')  
             })
         }
 
