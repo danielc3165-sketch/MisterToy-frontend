@@ -15,7 +15,7 @@ import { AppHeader } from './cmps/AppHeader.jsx'
 import { UserMsg } from './cmps/UserMsg.jsx'
 
 
-//import { AppHeader } from './cmps/AppHeader.js'
+import { AppHeader } from './cmps/AppHeader.js'
 
 export function App() {
   return (
