@@ -10,7 +10,7 @@ export function ToyList({toys, onRemoveToy}){
         <div className="li-btns">
             <Link to={`/toy/${toy._id}`}><button>Details</button></Link>
             <Link to={`/toy/edit/${toy._id}`}><button>Edit</button></Link> 
-            <button onClick={()=>onRemoveToy()}>Delete</button>
+            <button onClick={()=>onRemoveToy(toy._id)}>Delete</button>
         </div>
 
       </li>)}

@@ -1,6 +1,6 @@
 import { toyService } from "../../services/toy.service.local.js"
 import { store } from '../store.js'
-import { SET_TOYS, ADD_TOY, UPDATE_TOY } from "../reducers/toy.reducer.js"
+import { SET_TOYS, ADD_TOY, UPDATE_TOY, REMOVE_TOY } from "../reducers/toy.reducer.js"
 
 export function loadToys() {
 	//const filterBy = store.getState().carModule.filterBy
@@ -15,19 +15,20 @@ export function loadToys() {
 		})
 }
 
-export function removeCar(carId) {
-	return carService
-		.remove(carId).then(() => {
-			store.dispatch({ type: REMOVE_CAR, carId })
+export function removeToy(toyId) {
+	return toyService
+		.remove(toyId).then(() => {
+			store.dispatch({ type: REMOVE_TOY, toyId })
 		})
 		.catch(err => {
-			console.log('car action -> Cannot remove car', err)
+			console.log('car action -> Cannot remove toy', err)
 			throw err
 		})
 }
 
 export function removeCarOptimistic(carId) {
 	store.dispatch({ type: REMOVE_CAR, carId })
+	
 
 	return carService.remove(carId)
 		.then(() => {

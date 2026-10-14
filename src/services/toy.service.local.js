@@ -6,6 +6,7 @@ export const toyService = {
     query,
     getById,
     save,
+    remove,
     getEmptyToy,
 }
 
@@ -86,12 +87,12 @@ function query() {
         })
 }
 
-function getById(carId) {
-    return storageService.get(STORAGE_KEY, carId)
+function getById(toyId) {
+    return storageService.get(STORAGE_KEY, toyId)
 }
 
-function remove(carId) {
-    return storageService.remove(STORAGE_KEY, carId)
+function remove(toyId) {
+    return storageService.remove(STORAGE_KEY, toyId)
 }
 
 function save(toy) {

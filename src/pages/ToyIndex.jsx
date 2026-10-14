@@ -6,7 +6,7 @@ import { ToyList } from "../cmps/ToyList.jsx"
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 
-import { loadToys, saveToy } from "../store/actions/toy.action.js" 
+import { loadToys, removeToy } from "../store/actions/toy.action.js" 
 
 // import { toyService } from "../services/toy.service.local.js"
 
@@ -21,7 +21,13 @@ export function ToyIndex(){
 
     
     function onRemoveToy(toyId) {
-        console.log('it work')
+        removeToy(toyId)
+        .then(()=>{
+            showSuccessMsg('Toy deleted')
+        })
+        .catch(()=>{
+            showErrorMsg('Cannot delete toy')
+        })
     }
 
     if(!toys) return
