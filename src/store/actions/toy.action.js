@@ -1,4 +1,4 @@
-import { toyService } from "../../services/toy.service.local.js"
+import { toyService } from "../../services/toy.service.js"
 import { store } from '../store.js'
 import { SET_TOYS, ADD_TOY, UPDATE_TOY, REMOVE_TOY } from "../reducers/toy.reducer.js"
 
@@ -26,27 +26,14 @@ export function removeToy(toyId) {
 		})
 }
 
-export function removeCarOptimistic(carId) {
-	store.dispatch({ type: REMOVE_CAR, carId })
-	
 
-	return carService.remove(carId)
-		.then(() => {
-			showSuccessMsg('Removed Car!')
-		})
-		.catch(err => {
-			store.dispatch({ type: CAR_UNDO })
-			console.log('car action -> Cannot remove car', err)
-			throw err
-		})
-}
 
 export function saveToy(toy) {
 	const type = toy._id ? UPDATE_TOY : ADD_TOY
     
 	return toyService.save(toy)
 		.then(savedToy => {
-			console.log('savedToy',savedToy)
+			//console.log('savedToy',savedToy)
 			store.dispatch({ type, toy: savedToy })
 			return savedToy
 		})

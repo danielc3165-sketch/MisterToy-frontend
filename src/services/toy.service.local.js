@@ -121,28 +121,8 @@ function _getToyLabels(){
 
     return [labels[idx1],labels[idx2]]
 }
-    
-function getRandomCar() {
-    return {
-        vendor: 'Susita-' + (Date.now() % 1000),
-        price: utilService.getRandomIntInclusive(1000, 9000),
-        speed: utilService.getRandomIntInclusive(50, 150),
-    }
-}
 
 function getDefaultFilter() {
     return { txt: '', maxPrice: '' }
 }
 
-function _createCars() {
-    var cars = utilService.loadFromStorage(STORAGE_KEY)
-    if (cars && cars.length > 0) return
-
-    cars = []
-    for(var i = 0; i < 12; i++){
-        const car = getRandomCar()
-        car._id = utilService.makeId()
-        cars.push(car)
-    }
-    utilService.saveToStorage(STORAGE_KEY, cars)
-}

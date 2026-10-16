@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 import { saveToy } from "../store/actions/toy.action"
 
-import { toyService } from "../services/toy.service.local"
+import { toyService } from "../services/toy.service"
 
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 
