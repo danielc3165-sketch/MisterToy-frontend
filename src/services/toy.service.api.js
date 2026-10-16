@@ -36,7 +36,7 @@ function remove(toyId) {
 function save(toy) {
     if (toy._id) {
         return axios.put(url+'/'+toy._id, toy)
-        .then(res => console.log('res',res))
+        .then(res =>res.data)
     }
      else {
         return axios.post(url, toy)

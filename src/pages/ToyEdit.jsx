@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 import { saveToy } from "../store/actions/toy.action"
 
-import { toyService } from "../services/toy.service"
+import { toyService } from "../services/toy.service.api"
 
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 
@@ -39,7 +39,7 @@ export function ToyEdit(){
             })
             .catch(err => {
                 console.log('Had issues in toy details', err)
-                showErrorMsg('Had issues in car details')  
+                showErrorMsg('Had issues in toy details')  
             })
         }
 

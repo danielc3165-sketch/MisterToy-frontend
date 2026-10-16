@@ -1,4 +1,4 @@
-import { toyService } from "../../services/toy.service.js"
+import { toyService } from "../../services/toy.service.api.js"
 import { store } from '../store.js'
 import { SET_TOYS, ADD_TOY, UPDATE_TOY, REMOVE_TOY } from "../reducers/toy.reducer.js"
 
@@ -32,8 +32,9 @@ export function saveToy(toy) {
 	const type = toy._id ? UPDATE_TOY : ADD_TOY
     
 	return toyService.save(toy)
-		.then(savedToy => {
-			//console.log('savedToy',savedToy)
+	.then(savedToy => {
+		
+		    console.log('AX savedToy',savedToy)
 			store.dispatch({ type, toy: savedToy })
 			return savedToy
 		})
