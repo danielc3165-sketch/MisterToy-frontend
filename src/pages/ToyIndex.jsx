@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useSelector,useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 
+import { ToyFilter } from "../cmps/ToyFilter.jsx"
 import { ToyList } from "../cmps/ToyList.jsx"
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
@@ -34,6 +35,7 @@ export function ToyIndex(){
     
     return <section>
     <h1>ToyIndex</h1>
+    <ToyFilter />
     <div>
     <Link to={'/toy/edit'}><button className="add-btn" >Add Toy</button></Link>
     <ToyList toys={toys} onRemoveToy={onRemoveToy}/>
