@@ -59,13 +59,13 @@ export function ToyEdit(){
     }
 
     return <section>
-    <h2>ToyEdit</h2>
+    <h1>{toy._id ? 'Edit Toy' : 'Add Toy'}</h1>
      
     <form className="edit-form" onSubmit={onSubmit}>
     <input type="text" name="name" onChange={handleDetails} placeholder="Enter name"/>
     <input type="number" name="price" onChange={handleDetails} placeholder="Enter price" />
 
-    <button>Update</button>
+    <button>{toy._id ? 'Update' : 'Add' }</button>
     <Link to={'/toy'}>Back</Link>
     </form>
     
