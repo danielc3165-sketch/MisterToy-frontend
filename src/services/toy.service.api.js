@@ -7,6 +7,8 @@ export const toyService = {
     save,
     remove,
     getEmptyToy,
+    getDefaultFilter,
+    getLabels,
 }  
 
 const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 
@@ -15,14 +17,15 @@ const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
 const url = 'http://localhost:3030/api/toy'
 
 
-function query() {
-    return axios.get(url)
+function query(filterBy) {
+   
+    return axios.get(url,{params:filterBy})
     .then(res => res.data)
+
 }
 
 
 function getById(toyId) {
-    console.log('o.k')
     return axios.get(url + '/' + toyId, { withCredentials: true })
     .then(res => res.data)
     .catch(err => {'Cannot get toy',err})
@@ -47,10 +50,18 @@ function save(toy) {
 
 function getEmptyToy(){
     return { 
-imgUrl: 'hardcoded-url-for-now', 
-labels: _getToyLabels(), 
-inStock:utilService.getRandomIntInclusive(1, 2) === 1 ? true :false 
+    imgUrl: 'hardcoded-url-for-now', 
+    labels: _getToyLabels(), 
+    inStock:utilService.getRandomIntInclusive(1, 2) === 1 ? true :false 
 }
+}
+
+function getDefaultFilter() {
+    return { txt: '', inStock: false, labels:[], sortBy:'createdAt' }
+}
+
+function getLabels(){
+    return labels
 }
 
 function _getToyLabels(){
@@ -59,8 +70,4 @@ function _getToyLabels(){
     const idx2 = utilService.getRandomIntInclusive(4, 7)
 
     return [labels[idx1],labels[idx2]]
-}
-
-function getDefaultFilter() {
-    return { txt: '', maxPrice: '' }
 }

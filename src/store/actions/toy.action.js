@@ -2,10 +2,10 @@ import { toyService } from "../../services/toy.service.api.js"
 import { store } from '../store.js'
 import { SET_TOYS, ADD_TOY, UPDATE_TOY, REMOVE_TOY } from "../reducers/toy.reducer.js"
 
-export function loadToys() {
+export function loadToys(filterBy) {
 	//const filterBy = store.getState().carModule.filterBy
 
-	return toyService.query()
+	return toyService.query(filterBy)
 		.then(toys => {
 			store.dispatch({ type: SET_TOYS, toys })
 		})

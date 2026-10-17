@@ -10,6 +10,10 @@
     height: 20px;
 }
 
+.search > select{
+    height: 17px;
+}
+
 .search p{
     margin: 0;
 } 
