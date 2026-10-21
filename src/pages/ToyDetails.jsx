@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service.api"
 import { utilService } from "../services/util.service"
 
+import { Children  } from "../cmps/Children"
+
 export function ToyDetails(){
 
     const [ toy,setToy ] = useState()
@@ -32,6 +34,8 @@ export function ToyDetails(){
     <p>{toy.inStock ? 'In Stock' : 'Out Of Stock'}</p>
     <Link to={'/toy'}>Back</Link>
     </div>
+
+    <Children />
     
     </section>
 }

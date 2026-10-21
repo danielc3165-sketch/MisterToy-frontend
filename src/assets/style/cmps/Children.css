@@ -1,0 +1,17 @@
+.fancy-box{
+    width: 50%;
+    margin-top: 1em;
+    margin-inline-start: 2em;
+    padding: .5em;
+    background-color: var(--gray1);
+}
+
+.fancy-box > div{
+    align-items: center;
+}
+
+.chat-btn{
+    display: flex;
+    justify-self: left;
+    padding: 1em;
+}
