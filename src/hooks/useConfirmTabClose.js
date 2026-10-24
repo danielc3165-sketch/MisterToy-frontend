@@ -1,23 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-const confirmationMessage = 'You have unsaved changes. Continue?'
-
-export function useConfirmTabClose() {
-    const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
-
+export function useConfirmTabClose(hasChange) {
     useEffect(() => {
+        if (!hasChange) return
+
         function handleBeforeUnload(ev) {
-            if (hasUnsavedChanges) {
-                ev.returnValue = confirmationMessage
-                return confirmationMessage
-            }
+            ev.preventDefault()
+            ev.returnValue = ''
         }
 
         window.addEventListener('beforeunload', handleBeforeUnload)
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload)
         }
-    }, [hasUnsavedChanges])
-
-    return setHasUnsavedChanges
+    }, [hasChange])
 }

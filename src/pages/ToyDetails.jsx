@@ -16,9 +16,9 @@ export function ToyDetails(){
       if(toyId) loadToy(toyId)
     },[])
 
-    function loadToy(toyId){
-        toyService.getById(toyId)
-        .then(toy=>setToy(toy))
+    async function loadToy(toyId){
+        const toyToSave = await toyService.getById(toyId)
+        setToy(toyToSave)
     }
     
     if(!toy) return

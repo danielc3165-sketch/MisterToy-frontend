@@ -17,30 +17,30 @@ export function ToyEdit(){
     const navigate = useNavigate()
     
         useEffect(()=>{
-            console.log('toy',toy)
           if(toyId) loadToy(toyId)
         },[])
     
-        function loadToy(toyId){
-            toyService.getById(toyId)
-            .then(toy=>setToy(toy))
+        async function loadToy(toyId){
+            const toy = await toyService.getById(toyId)
+            setToy(toy)
         }
     
-        function onSubmit(ev){
+        async function onSubmit(ev){
             ev.preventDefault()
             if(!toy) return 
             if(!details.name) return (alert('must have name'))
             toy.name=details.name
             toy.price=details.price || 0
-            saveToy(toy)  
-            .then(() => {
-                showSuccessMsg('Toy Update!')
-                navigate('/toy')
-            })
-            .catch(err => {
+            try{
+            await saveToy(toy)  
+            showSuccessMsg('Toy Update!')
+            navigate('/toy')
+            }
+            catch (err) {
                 console.log('Had issues in toy details', err)
-                showErrorMsg('Had issues in toy details')  
-            })
+                showErrorMsg('Had issues in toy details')
+                throw err  
+            }
         }
 
     function handleDetails({target}){
@@ -54,8 +54,6 @@ export function ToyEdit(){
         }
 
         setDetails( prev=>({ ...prev , [field]:value}))
-
-        console.log('details',details)
     }
 
     return <section>

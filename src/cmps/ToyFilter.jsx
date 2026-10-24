@@ -1,26 +1,39 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 import { toyService } from "../services/toy.service.api"
+import { utilService } from "../services/util.service"
+
+import { useConfirmTabClose } from "../hooks/useConfirmTabClose"
 
 export function ToyFilter({ filterBy, setFilterBy }){
     
     const [ filterByToEdit, setFilterByToEdit ] = useState(filterBy)
     const allLabels = toyService.getLabels()
-    const [ isOn, setIsOn ] = useState(false)
-        
-
-    useEffect(()=>{
-      setFilterByToEdit(prevFilter => ({ ...prevFilter, inStock: isOn }))
-      
-    },[isOn])
-
-    useEffect(()=>{
-       setFilterBy(filterByToEdit)
-    },[filterByToEdit])
-
+    const [ onlyInStock, setOnlyInStock ] = useState(false)
+    const [ hasChange,setHasChange ] = useState(false)
     
+    const debouncedOnSetFilter = useRef(utilService.debounce(onSetEditFilter))
+    useConfirmTabClose(hasChange)
+
+
+    useEffect(()=>{
+      setFilterByToEdit(prevFilter => ({ ...prevFilter, inStock: onlyInStock }))
+      
+    },[onlyInStock])
+
+    useEffect(()=>{
+      
+      debouncedOnSetFilter.current(filterByToEdit)
+        
+    },[filterByToEdit,setFilterBy])
+
+    function onSetEditFilter(filterByToEdit){
+        setFilterBy(filterByToEdit)
+    }
 
     function handleFilter({target}){
+        setHasChange(true)
+
         var field = target.name
         var value = target.value
         
@@ -38,7 +51,10 @@ export function ToyFilter({ filterBy, setFilterBy }){
       <p>Search:</p> <input type="text" name='txt' value={txt} onChange={handleFilter}/>
       
       <div className="flex" >
-        <input type="checkbox" checked = {isOn} name="inStock" onChange={()=>setIsOn(!isOn)} /> 
+        <input type="checkbox" checked = {onlyInStock} name="inStock" onChange={(ev)=> {
+          setOnlyInStock(!onlyInStock)
+          setHasChange(true)
+        }} /> 
         <p>Only In Stock</p>
       </div>
       
