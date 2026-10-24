@@ -2,46 +2,45 @@ import { toyService } from "../../services/toy.service.api.js"
 import { store } from '../store.js'
 import { SET_TOYS, ADD_TOY, UPDATE_TOY, REMOVE_TOY } from "../reducers/toy.reducer.js"
 
-export function loadToys(filterBy) {
+export async function loadToys(filterBy) {
 	//const filterBy = store.getState().carModule.filterBy
 
-	return toyService.query(filterBy)
-		.then(toys => {
-			store.dispatch({ type: SET_TOYS, toys })
-		})
-		.catch(err => {
+	    try {
+			const toys = await toyService.query(filterBy)
+			return store.dispatch({ type: SET_TOYS, toys })
+		}
+		catch (err) {
 			console.log('car action -> Cannot load toys', err)
 			throw err
-		})
+		}
 }
 
-export function removeToy(toyId) {
-	return toyService
-		.remove(toyId).then(() => {
-			store.dispatch({ type: REMOVE_TOY, toyId })
-		})
-		.catch(err => {
+export async function removeToy(toyId) {
+	    try{
+		    await toyService.remove(toyId)
+		    store.dispatch({ type: REMOVE_TOY, toyId })
+		}
+		catch(err){
 			console.log('car action -> Cannot remove toy', err)
 			throw err
-		})
+		}
 }
 
 
 
-export function saveToy(toy) {
+export async function saveToy(toy) {
 	const type = toy._id ? UPDATE_TOY : ADD_TOY
     
-	return toyService.save(toy)
-	.then(savedToy => {
-		
-		    console.log('AX savedToy',savedToy)
-			store.dispatch({ type, toy: savedToy })
-			return savedToy
-		})
-		.catch(err => {
+	try {
+		const savedToy = await toyService.save(toy)
+		store.dispatch({ type, toy: savedToy })
+		return savedToy
+		}
+		catch(err){
 			console.log('toy action -> Cannot save toy', err)
 			throw err
-		})
+		}
+
 }
 
 export function setFilterBy(filterBy) {

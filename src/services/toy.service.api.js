@@ -1,4 +1,4 @@
-import axios from "axios"
+import { httpService } from "./http.service"
 import { utilService } from "./util.service"
 
 export const toyService = {
@@ -14,36 +14,46 @@ export const toyService = {
 const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 
                'Outdoor', 'Battery Powered'] 
 
-const url = 'http://localhost:3030/api/toy'
 
+async function query(filterBy) {
 
-function query(filterBy) {
-   
-    return axios.get(url,{params:filterBy})
-    .then(res => res.data)
-
+    return httpService.get('toy',filterBy)
+    
+    // const res = await axios.get(url,{params:filterBy})
+    // return res.data
 }
 
 
-function getById(toyId) {
-    return axios.get(url + '/' + toyId, { withCredentials: true })
-    .then(res => res.data)
-    .catch(err => {'Cannot get toy',err})
+async function getById(toyId) {
+    try{
+        return httpService.get('toy/' + toyId,{ withCredentials: true })
+    // const res = await axios.get(url + '/' + toyId, { withCredentials: true })
+    // return res.data
+    }
+    catch (err) {
+        'Cannot get toy',err
+        throw err
+    }
 }
 
-function remove(toyId) {
-    return axios.delete(url+'/' + toyId)
-    .then(res => console.log('res',res))
+async function remove(toyId) {
+
+    return httpService.delete('toy/'+toyId)
+    // const res = await axios.delete(url+'/' + toyId)
+    // console.log(res.data) 
 }
 
-function save(toy) {
+async function save(toy) {
     if (toy._id) {
-        return axios.put(url+'/'+toy._id, toy)
-        .then(res =>res.data)
+        return httpService.put('toy/'+toy._id,toy)
+        // const res = await axios.put(url+'/'+toy._id, toy)
+        // return res.data
     }
      else {
-        return axios.post(url, toy)
-        .then(res => res.data)
+        
+        return httpService.post('toy',toy)
+        // const res = await axios.post(url, toy)
+        // return res.data
 
     }
 }

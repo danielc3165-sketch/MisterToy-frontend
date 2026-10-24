@@ -6,15 +6,10 @@ export function getLabels(){
     return labels
 }
 
-export function getData() {
-    return toyService.query()
-    .then(toys =>
-        labels.map(label =>
-            toys.filter(toy => toy.labels.includes(label)).length
-        )
+export async function getData() {
+    const toys= await toyService.query()
+    return labels.map(label =>
+        toys.filter(toy => toy.labels.includes(label)).length
     )
+    
 }
-
-// export function getDataByPrice(){
-
-// }
