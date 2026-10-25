@@ -59,10 +59,11 @@ async function save(toy) {
 }
 
 function getEmptyToy(){
+    //console.log('R',utilService.getRandomIntInclusive(0, 1) === 1)
     return { 
     imgUrl: 'hardcoded-url-for-now', 
     labels: _getToyLabels(), 
-    inStock:utilService.getRandomIntInclusive(1, 2) === 1 ? true :false 
+    inStock:utilService.getRandomIntInclusive(0, 1) === 1 
 }
 }
 

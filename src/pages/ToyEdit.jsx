@@ -11,6 +11,7 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 export function ToyEdit(){
     
     const [ toy,setToy ] = useState(toyService.getEmptyToy())
+    console.log('E',toy)
     const [ details,setDetails ] = useState({})
     
     const { toyId } = useParams()

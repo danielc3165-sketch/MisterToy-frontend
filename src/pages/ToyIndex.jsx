@@ -23,7 +23,7 @@ export function ToyIndex(){
     useEffectUpdate(()=>{
        
       loadToys(filterBy)
-
+      console.log('T',toys)
     },[filterBy])
 
     
