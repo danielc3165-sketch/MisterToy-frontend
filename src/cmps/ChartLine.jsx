@@ -1,59 +1,94 @@
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-// import faker from 'faker';
-
+    ArcElement,
+    CategoryScale,
+    Chart as ChartJS,
+    Legend,
+    LinearScale,
+    LineElement,
+    PointElement,
+    RadialLinearScale,
+    Title,
+    Tooltip,
+} from 'chart.js'
+import { Line } from 'react-chartjs-2'
 ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      //position: 'top' as const ,
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Line Chart',
-    },
-  },
-};
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
+    CategoryScale,
+    RadialLinearScale,
+    ArcElement,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+)
 
 export function ChartLine() {
-  return <Line options={options} data={data} />;
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Toys Prices',
+            },
+            tooltip: {
+                callbacks: {
+                    label: context => `$${context.formattedValue}`,
+                },
+            },
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: value => `$${value}`,
+                },
+            },
+        },
+    }
+    
+    const labels = [
+        '2000',
+        '2005',
+        '2008',
+        '2013',
+        '2017',
+        '2020',
+        '2021',
+        '2022',
+        '2023',
+    ]
+
+    const generateRandomData = () => {
+        return labels.map(() => Math.floor(Math.random() * 20 + 5))
+    }
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Prices',
+                data: generateRandomData(),
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            },
+        ],
+    }
+
+    return (
+        <section
+            className="flex justify-center"
+            style={{
+                margin: 'auto',
+                position: 'relative',
+                height: '30vh',
+                width: '80vw',
+            }}
+        >
+            <Line options={options} data={data} />
+        </section>
+    )
 }

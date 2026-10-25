@@ -1,3 +1,13 @@
+.chart-container{
+    display:grid;
+    gap:2em;
+}
+
 .chart {
     justify-self: center;
 }
+
+.chart-line{
+    display: grid;
+}
+

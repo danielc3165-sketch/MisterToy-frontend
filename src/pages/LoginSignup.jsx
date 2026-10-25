@@ -1,6 +1,7 @@
 
 import { Formik, Form, Field } from "formik"
 import * as Yup from "yup"
+import { Link } from "react-router-dom"
 
 export function LoginSignup() {
 
@@ -16,7 +17,7 @@ export function LoginSignup() {
     email: Yup.string().email("Invalid email").required("Required"),
   })
 
-  return (
+  return <section>
     <div>
       <h2>Signup</h2>
       <Formik
@@ -48,7 +49,10 @@ export function LoginSignup() {
         )}
       </Formik>
     </div>
-  )
+
+     <Link to={'/toy'}>Back</Link>
+
+  </section>
 }
 
 
