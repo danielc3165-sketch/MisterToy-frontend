@@ -1,6 +1,19 @@
 .toy-details {
     display: grid;
-    justify-items: left;
-    width: 50%;
+    grid-template-columns: 50% 50%;
     padding-inline-start: 2em;
+}
+
+.preview{
+   justify-items: left;
+}
+
+
+.toy-description {
+    text-align: start;
+    padding-inline-end: 2em;
+}
+
+.children-page{
+    width: 100%;
 }

@@ -4,8 +4,9 @@ import { toyService } from "../services/toy.service.api"
 import { utilService } from "../services/util.service"
 
 import { useConfirmTabClose } from "../hooks/useConfirmTabClose"
+import { useEffectUpdate } from "../hooks/useEffectUpdate"
 
-export function ToyFilter({ filterBy, setFilterBy }){
+export function ToyFilter({ filterBy, onSetFilterBy }){
     
     const [ filterByToEdit, setFilterByToEdit ] = useState(filterBy)
     const allLabels = toyService.getLabels()
@@ -21,14 +22,14 @@ export function ToyFilter({ filterBy, setFilterBy }){
       
     },[onlyInStock])
 
-    useEffect(()=>{
+    useEffectUpdate(()=>{
       
       debouncedOnSetFilter.current(filterByToEdit)
         
-    },[filterByToEdit,setFilterBy])
+    },[filterByToEdit])
 
     function onSetEditFilter(filterByToEdit){
-        setFilterBy(filterByToEdit)
+        onSetFilterBy(filterByToEdit)
     }
 
     function handleFilter({target}){
@@ -43,12 +44,13 @@ export function ToyFilter({ filterBy, setFilterBy }){
 
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
-
-    const { txt,labels } = filterByToEdit
+    if(!filterByToEdit) return
+    console.log('f',filterByToEdit)
+    const { txt,labels,sortBy } = filterByToEdit
 
     return <section>
     <div className="search">
-      <p>Search:</p> <input type="text" name='txt' value={txt} onChange={handleFilter}/>
+      <p>Search:</p> <input type="text" name='txt' value={txt} onChange={handleFilter} placeholder="Text"/>
       
       <div className="flex" >
         <input type="checkbox" checked = {onlyInStock} name="inStock" onChange={(ev)=> {
@@ -78,7 +80,7 @@ export function ToyFilter({ filterBy, setFilterBy }){
 
     <div className="sort">
         <p>Sort By:</p>
-        <select name="sortBy" onChange={handleFilter}>
+        <select name="sortBy" value={sortBy} onChange={handleFilter}>
             <option value="createdAt">New</option>
             <option value="name">Name</option>
             <option value="price">Price</option>

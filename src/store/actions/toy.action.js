@@ -1,6 +1,6 @@
 import { toyService } from "../../services/toy.service.api.js"
 import { store } from '../store.js'
-import { SET_TOYS, ADD_TOY, UPDATE_TOY, REMOVE_TOY } from "../reducers/toy.reducer.js"
+import { SET_TOYS, ADD_TOY, UPDATE_TOY, REMOVE_TOY, SET_FILTER_BY } from "../reducers/toy.reducer.js"
 
 export async function loadToys(filterBy) {
 	//const filterBy = store.getState().carModule.filterBy

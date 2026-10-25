@@ -33,5 +33,13 @@
 }
 
 .p-green{
-    color: rgb(0, 254, 0);
+    color:rgb(31 228 207)
+}
+
+.p-green-dark{
+    color:hsl(128deg 84.54% 40.14%);
+}
+
+.p-gold{
+    color: gold;
 }

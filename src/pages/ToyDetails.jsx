@@ -20,22 +20,33 @@ export function ToyDetails(){
         const toyToSave = await toyService.getById(toyId)
         setToy(toyToSave)
     }
+
+    function price(price){
+        if(price<=50) return 'p-green'
+        else if(price>=100) return 'p-gold'
+        else return ''
+    }
     
     if(!toy) return
 
     return <section>
 
-    <h1>ToyDetails</h1>
+    <h2>Toy Details</h2>
     
     <div className="toy-details">
-    <h2>{toy.name}</h2>
-    <p>{utilService.makeLorem(25)}</p>
-    <p>Price: {toy.price}$</p>
-    <p>{toy.inStock ? 'In Stock' : 'Out Of Stock'}</p>
+    <div className="preview">
+    <h3>{toy.name}</h3>
+    <p className="toy-description">{utilService.makeLorem(25)}</p>
+    <p>Price: <span className={price(toy.price)}>{toy.price}$</span></p>
+    <p className={toy.inStock ? 'p-green-dark' : 'p-red'}>
+        {toy.inStock ? 'In Stock' : 'Out Of Stock'}
+    </p>
     <Link to={'/toy'}>Back</Link>
     </div>
-
+    
     <Children />
+    </div>
+
     
     </section>
 }

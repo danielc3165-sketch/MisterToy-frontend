@@ -23,14 +23,15 @@ export function ToyEdit(){
         async function loadToy(toyId){
             const toy = await toyService.getById(toyId)
             setToy(toy)
+            setDetails({name:toy.name,price:toy.price})
         }
     
         async function onSubmit(ev){
             ev.preventDefault()
             if(!toy) return 
-            if(!details.name) return (alert('must have name'))
-            toy.name=details.name
-            toy.price=details.price || 0
+            if(!details.name && !toy._id) return (alert('must have name'))
+            toy.name=details.name || toy.name
+            toy.price=details.price || toy.price
             try{
             await saveToy(toy)  
             showSuccessMsg('Toy Update!')
@@ -57,11 +58,11 @@ export function ToyEdit(){
     }
 
     return <section>
-    <h1>{toy._id ? 'Edit Toy' : 'Add Toy'}</h1>
+    <h2>{toy._id ? 'Edit Toy' : 'Add Toy'}</h2>
      
     <form className="edit-form" onSubmit={onSubmit}>
-    <input type="text" name="name" onChange={handleDetails} placeholder="Enter name"/>
-    <input type="number" name="price" onChange={handleDetails} placeholder="Enter price" />
+    <input type="text" name="name" onChange={handleDetails} value={details.name} placeholder="Enter name"/>
+    <input type="number" name="price" onChange={handleDetails} value={details.price} placeholder="Enter price" />
 
     <button>{toy._id ? 'Update' : 'Add' }</button>
     <Link to={'/toy'}>Back</Link>
