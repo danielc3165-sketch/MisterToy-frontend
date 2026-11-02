@@ -4,7 +4,7 @@ export function ToyPreview({toy}){
 
     function price(price){
         if(price<=50) return 'p-green'
-        else if(price>=100) return 'p-gold'
+        else if(price>=180) return 'p-gold'
         else return ''
     }
 

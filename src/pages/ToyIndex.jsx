@@ -16,7 +16,10 @@ import { useEffectUpdate } from "../hooks/useEffectUpdate.js"
 
 export function ToyIndex(){
     
+    const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
     const toys = useSelector(storeState => storeState.toyModule.toys) 
+    
+    
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isOnline = useOnlineStatus() 
 
@@ -46,10 +49,11 @@ export function ToyIndex(){
     return <section>
     <div className="is-online">{isOnline ? 'You Are Online' : 'Net out of conect'}</div>
     <h1>Toy Store</h1>
+    {loggedInUser&&<p>Hellow {loggedInUser.fullName}!</p>}
     <ToyFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
     <div>
     <Link to={'/toy/edit'}><button className="add-btn" >Add Toy</button></Link>
-    <ToyList toys={toys} onRemoveToy={onRemoveToy}/>
+    <ToyList toys={toys} onRemoveToy={onRemoveToy} loggedInUser={loggedInUser}/>
     </div>
     </section>
 }

@@ -4,13 +4,12 @@ import { SET_TOYS, ADD_TOY, UPDATE_TOY, REMOVE_TOY, SET_FILTER_BY } from "../red
 
 export async function loadToys(filterBy) {
 	//const filterBy = store.getState().carModule.filterBy
-
 	    try {
 			const toys = await toyService.query(filterBy)
 			return store.dispatch({ type: SET_TOYS, toys })
 		}
 		catch (err) {
-			console.log('car action -> Cannot load toys', err)
+			console.log('toy action -> Cannot load toys', err)
 			throw err
 		}
 }

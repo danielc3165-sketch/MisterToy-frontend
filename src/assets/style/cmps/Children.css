@@ -13,3 +13,21 @@
     justify-self: left;
     padding: 1em;
 }
+
+.chat-msg{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5em;
+    margin: .5em 0;
+    background-color: var(--gray2);
+
+    >div{
+       display: flex;
+       align-items: center;
+       gap: .5em;
+    >p{
+        margin: 0;
+    }
+    }   
+}

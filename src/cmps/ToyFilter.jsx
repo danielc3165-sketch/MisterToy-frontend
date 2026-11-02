@@ -45,7 +45,6 @@ export function ToyFilter({ filterBy, onSetFilterBy }){
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
     if(!filterByToEdit) return
-    console.log('f',filterByToEdit)
     const { txt,labels,sortBy } = filterByToEdit
 
     return <section>

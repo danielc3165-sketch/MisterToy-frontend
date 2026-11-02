@@ -3,7 +3,7 @@ import { userService } from "../../services/user.service.api"
 export const SET_USER = 'SET_USER'
 
 const initialState={
-    loggedInUser: userService.getLoggedInUser()
+    loggedInUser: userService.getLoggedInUser() || null
 }
 
 export function userReducer(state = initialState, action = {}) {

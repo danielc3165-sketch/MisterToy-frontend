@@ -2,7 +2,7 @@ import { Chat } from "./Chat"
 
 import { useState } from "react"
 
-export function Children() {
+export function Children({toyId}) {
  
    const [ chatOn,setChatOn ] = useState(false)
 
@@ -14,7 +14,7 @@ export function Children() {
       <button className="chat-btn" onClick={()=>setChatOn(!chatOn)}>{chatOn ? 'Close' : 'Chat'}</button>
       
 
-      {chatOn && <FancyBox title="Hi">
+      {chatOn && <FancyBox title="Hi" toyId={toyId}>
         <div>
         <h4>Hellooooo</h4>
         <span>🍌</span>
@@ -28,14 +28,14 @@ export function Children() {
   )
 }
 
-function FancyBox({ title = 'Hello', children }) {
+function FancyBox({ title = 'Hello', children, toyId }) {
   return (
     <div>
       <h3>{title}</h3>
       <div>
       {children}
       </div>
-      <Chat />
+      <Chat toyId={toyId} />
     </div>
 
 

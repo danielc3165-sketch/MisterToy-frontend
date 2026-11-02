@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import { login, signup } from "../store/actions/user.action"
 
@@ -13,6 +14,7 @@ export function LoginSignup() {
 
     
     //console.log('L',loggedInUser)
+    const navigate = useNavigate()
 
     function handleCredentials({target}){
       const { value, name } = target
@@ -25,18 +27,20 @@ export function LoginSignup() {
        
     }
 
-    function _login(){
+    async function _login(){
     try {
-      login(credentials)
+      await login(credentials)
+      navigate('/toy')
       showSuccessMsg('Logged in successfully')
     } catch (error) {
       showErrorMsg('Oops try again')
     }
     }
 
-    function _signup(){
+    async function _signup(){
     try {
-      signup(credentials)
+      await signup(credentials)
+      navigate('/toy')
       showSuccessMsg('Logged in successfully')
     } catch (error) {
       showErrorMsg('Oops try again')

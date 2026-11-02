@@ -9,6 +9,9 @@ export const toyService = {
     getEmptyToy,
     getDefaultFilter,
     getLabels,
+    addMsg,
+    removeMsg,
+    getEmptyMsg,
 }  
 
 const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 
@@ -58,6 +61,24 @@ async function save(toy) {
     }
 }
 
+async function addMsg(toyId, msg) {
+   
+   return  httpService.post('toy/' + `${toyId}/msg`, msg)
+  
+}
+
+async function removeMsg(toyId, msgId) {
+   return httpService.delete('toy/' + `${toyId}/msg/${msgId}`)
+}
+
+
+function getEmptyMsg(){
+   return {
+    txt:'',
+    by:{}
+    }
+}
+
 function getEmptyToy(){
     //console.log('R',utilService.getRandomIntInclusive(0, 1) === 1)
     return { 
@@ -67,9 +88,14 @@ function getEmptyToy(){
 }
 }
 
+
+
+
 function getDefaultFilter() {
     return { txt: '', inStock: false, labels:[], sortBy:'createdAt' }
 }
+
+
 
 function getLabels(){
     return labels
