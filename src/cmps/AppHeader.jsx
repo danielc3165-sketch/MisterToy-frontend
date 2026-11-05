@@ -12,6 +12,12 @@ export function AppHeader(){
             <Link to={'/toy'}>Toys</Link>
             <Link to={'/map'}>Map</Link>
             <Link to={'/dashboard'}>Dashboard</Link>
+            {loggedInUser?.isAdmin && (
+                <Link to={'/review'}>Reviews</Link>
+            )}
+            {loggedInUser && (
+                <Link to={`/user/${loggedInUser._id}`}>Profile</Link>
+            )}
             {loggedInUser ? (
                 <a className="login-color" onClick={logout}>
                     Logout

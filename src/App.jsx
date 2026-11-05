@@ -8,6 +8,8 @@ import { Dashboard } from './pages/Dashboard.jsx'
 import { LoginSignup } from './pages/LoginSignup.jsx'
 import { ToyIndex } from './pages/ToyIndex.jsx'
 import { ToyDetails } from './pages/ToyDetails.jsx'
+import { UserDetails } from './pages/UserDetails.jsx'
+import { ReviewExplore } from './pages/ReviewExplore.jsx'
 import { ToyEdit } from './pages/ToyEdit.jsx'
 import { Map } from './pages/Map.jsx' 
 
@@ -30,6 +32,8 @@ export function App() {
     <Route path='/toy/edit'element={<ToyEdit />} />
     <Route path='/toy/edit/:toyId'element={<ToyEdit />} />
     <Route path='/toy/:toyId' element={<ToyDetails />} />
+    <Route path='/user/:userId' element={<UserDetails />} />
+    <Route path='/review' element={<ReviewExplore />} />
     <Route path='/login' element={<LoginSignup />} />
     <Route path='/dashboard' element={<Dashboard />} />
     <Route path='/map' element={<Map />} />

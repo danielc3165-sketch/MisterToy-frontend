@@ -16,6 +16,7 @@ async function login({ userName, password }) {
     const user = await httpService.post(BASE_URL + 'login', {
       userName,
       password,
+      
     })
     _setLoggedInUser(user)
     return user
