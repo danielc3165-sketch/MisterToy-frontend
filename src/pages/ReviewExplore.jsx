@@ -11,7 +11,7 @@ export  function ReviewExplore() {
     
     async function getReviews() {
         const reviews = await loadReviews()
-        console.log('reviews:', reviews)
+        //console.log('reviews:', reviews)
         setReviews(reviews)
     }
 

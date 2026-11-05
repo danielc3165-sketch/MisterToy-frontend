@@ -3,15 +3,16 @@ import { useParams } from "react-router-dom"
 import { Link, useNavigate } from "react-router-dom"
 
 import { saveToy } from "../store/actions/toy.action"
+import { loadReviews } from "../store/actions/review.action.js"
 
 import { toyService } from "../services/toy.service.api"
+import { reviewService } from "../services/review.service.js"
 
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 
 export function ToyEdit(){
     
     const [ toy,setToy ] = useState(toyService.getEmptyToy())
-    console.log('T',toy)
     const [ details,setDetails ] = useState({})
     
     const { toyId } = useParams()
@@ -25,6 +26,13 @@ export function ToyEdit(){
             const toy = await toyService.getById(toyId)
             setToy(toy)
             setDetails({name:toy.name,price:toy.price})
+        }
+
+        async function loadToyReviews() {
+            const filterBy = reviewService.getDefultFilter() 
+            filterBy.byToyId = toyId
+            const reviews = await loadReviews(filterBy)
+            setUserReviews(reviews)
         }
     
         async function onSubmit(ev){

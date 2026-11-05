@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 
+import { loadReviews } from "../store/actions/review.action.js"
+
 import { toyService } from "../services/toy.service.api"
+import { reviewService } from "../services/review.service.js"
 import { utilService } from "../services/util.service"
 
 import { Children  } from "../cmps/Children"
@@ -9,11 +12,15 @@ import { Children  } from "../cmps/Children"
 export function ToyDetails(){
 
     const [ toy,setToy ] = useState()
+    const [ toyReviews, setToyReviews ] = useState(null)
 
     const { toyId } = useParams()
 
     useEffect(()=>{
-      if(toyId) loadToy(toyId)
+      if(toyId) {
+        loadToy(toyId)
+        loadToyReviews()
+      }
     },[])
 
     async function loadToy(toyId){
@@ -21,13 +28,20 @@ export function ToyDetails(){
         setToy(toyToSave)
     }
 
+    async function loadToyReviews() {
+            const filterBy = reviewService.getDefultFilter() 
+            filterBy.byToyId = toyId
+            const reviews = await loadReviews(filterBy)
+            setToyReviews(reviews)
+        }
+
     function price(price){
         if(price<=50) return 'p-green'
         else if(price>=100) return 'p-gold'
         else return ''
     }
     
-    if(!toy) return
+    if(!toy || !toyReviews) return <div>Loading...</div>
 
     return <section>
 
@@ -46,7 +60,15 @@ export function ToyDetails(){
     
     <Children toyId={toyId}/>
     </div>
-
     
-    </section>
+    <div className="toy-reviews">
+      <h3>Reviews</h3>
+      {toyReviews && toyReviews.map(review => (
+        <div key={review._id} className="review">
+          <h4>{review.user?.fullName}</h4>
+          <p>{review.txt}</p>
+        </div>
+      ))}
+    </div>
+  </section>
 }

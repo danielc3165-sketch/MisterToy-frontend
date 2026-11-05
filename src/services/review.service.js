@@ -1,14 +1,16 @@
 import { httpService } from './http.service'
 
 export const reviewService = {
-	add,
 	query,
+	add,
 	remove,
+	getDefultFilter,
 }
 
-async function query() {
-	//var queryStr = !filterBy ? '' : `?name=${filterBy.name}&sort=anaAref`
-	return await httpService.get(`review`)
+async function query(filterBy) {
+	console.log('filterBy:', filterBy)
+	var queryStr = !filterBy ? '' : `?byToyId=${filterBy.byToyId}&byUserId=${filterBy.byUserId}`
+	return await httpService.get(`review${queryStr}`)
 }
 
 async function remove(reviewId) {
@@ -17,4 +19,11 @@ async function remove(reviewId) {
 
 async function add({ txt, toyId, userId }) {
 	return await httpService.post(`review`, { txt, toyId, userId })
+}
+
+function getDefultFilter() {
+	return {
+		byUserId: '',
+		byToyId: '',
+	}
 }
