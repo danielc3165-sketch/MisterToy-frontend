@@ -63,9 +63,12 @@ export function LoginSignup() {
     </form>
 
     <button onClick={()=>setIsSignup(!isSignup)}>{isSignup ? 'Login' : 'Signup'}</button>
+    
+    <div className="back-link">
     <Link to={'/toy'}>Back</Link>
-
-    </section>
+    </div>
+    
+</section>
 }
 
 

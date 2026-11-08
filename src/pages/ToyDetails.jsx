@@ -8,6 +8,8 @@ import { reviewService } from "../services/review.service.js"
 import { utilService } from "../services/util.service"
 
 import { Children  } from "../cmps/Children"
+import { ToyReviews } from "../cmps/ToyReviews.jsx"
+
 
 export function ToyDetails(){
 
@@ -19,7 +21,7 @@ export function ToyDetails(){
     useEffect(()=>{
       if(toyId) {
         loadToy(toyId)
-        loadToyReviews()
+        loadToyReviews(toyId)
       }
     },[])
 
@@ -28,8 +30,9 @@ export function ToyDetails(){
         setToy(toyToSave)
     }
 
-    async function loadToyReviews() {
+    async function loadToyReviews(toyId) {
             const filterBy = reviewService.getDefultFilter() 
+             console.log('toyId:', toyId)
             filterBy.byToyId = toyId
             const reviews = await loadReviews(filterBy)
             setToyReviews(reviews)
@@ -43,11 +46,12 @@ export function ToyDetails(){
     
     if(!toy || !toyReviews) return <div>Loading...</div>
 
-    return <section>
+    return <section className="toy-details-page">
 
-    <h2>Toy Details</h2>
+    <Children toyId={toyId} />
     
     <div className="toy-details">
+    <h2>Toy Details</h2>
     <div className="preview">
     <h3>{toy.name}</h3>
     <p className="toy-description">{utilService.makeLorem(25)}</p>
@@ -55,20 +59,13 @@ export function ToyDetails(){
     <p className={toy.inStock ? 'p-green-dark' : 'p-red'}>
         {toy.inStock ? 'In Stock' : 'Out Of Stock'}
     </p>
+    <div className="back-link">
     <Link to={'/toy'}>Back</Link>
     </div>
-    
-    <Children toyId={toyId}/>
     </div>
+    <ToyReviews toyReviews={toyReviews} toyId={toyId} loadToyReviews={loadToyReviews}/>
     
-    <div className="toy-reviews">
-      <h3>Reviews</h3>
-      {toyReviews && toyReviews.map(review => (
-        <div key={review._id} className="review">
-          <h4>{review.user?.fullName}</h4>
-          <p>{review.txt}</p>
-        </div>
-      ))}
     </div>
+
   </section>
 }

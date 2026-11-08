@@ -12,6 +12,7 @@ export const toyService = {
     addMsg,
     removeMsg,
     getEmptyMsg,
+    getEmptyReview,
 }  
 
 const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 
@@ -29,7 +30,7 @@ async function query(filterBy) {
 
 async function getById(toyId) {
     try{
-        return httpService.get('toy/' + toyId,{ withCredentials: true })
+        return httpService.get('toy/' + toyId)
     // const res = await axios.get(url + '/' + toyId, { withCredentials: true })
     // return res.data
     }
@@ -76,6 +77,14 @@ function getEmptyMsg(){
    return {
     txt:'',
     by:{}
+    }
+}
+
+function getEmptyReview(){
+    return {
+        txt:'',
+        userId:'',
+        toyId:''
     }
 }
 

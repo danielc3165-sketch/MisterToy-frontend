@@ -26,5 +26,6 @@ export function AppHeader(){
                 <Link to={'/login'} className="login-color">Login</Link>
             )}
         </div>
+        <button className="menu-btn">Menu</button> 
     </div>
 }

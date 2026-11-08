@@ -66,7 +66,7 @@ export function ToyEdit(){
         setDetails( prev=>({ ...prev , [field]:value}))
     }
 
-    return <section>
+    return <section className="toy-edit">
     <h2>{toy._id ? 'Edit Toy' : 'Add Toy'}</h2>
      
     <form className="edit-form" onSubmit={onSubmit}>
@@ -74,7 +74,9 @@ export function ToyEdit(){
     <input type="number" name="price" onChange={handleDetails} value={details.price} placeholder="Enter price" />
 
     <button>{toy._id ? 'Update' : 'Add' }</button>
+    <div className="back-link">
     <Link to={'/toy'}>Back</Link>
+    </div>
     </form>
     
     </section>

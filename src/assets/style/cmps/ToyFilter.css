@@ -1,6 +1,7 @@
 .search {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1em;
     
     padding-block: 1em;

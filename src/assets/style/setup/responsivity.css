@@ -1,5 +1,30 @@
-@media (width<550px){
-.header-links {
-    visibility: hidden;
+@media (width<700px){
+
+/* header    */
+.header .header-links {
+    display: none;
+}
+
+.header .menu-btn{
+    display:block;
+}
+
+/* filter */
+
+.toy-filter .search,.toy-filter .sort{
+    justify-content: center;
+    padding-inline: 0;
+}
+
+/* edit */
+
+.toy-edit .edit-form{
+    width:50%
+}
+
+/* details */
+
+.children-page{
+    display: none;
 }
 }

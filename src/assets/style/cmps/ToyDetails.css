@@ -1,6 +1,10 @@
+.toy-details-page{
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
 .toy-details {
     display: grid;
-    grid-template-columns: 50% 50%;
     padding-inline-start: 2em;
 }
 
@@ -12,8 +16,4 @@
 .toy-description {
     text-align: start;
     padding-inline-end: 2em;
-}
-
-.children-page{
-    width: 100%;
 }

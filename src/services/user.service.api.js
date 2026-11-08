@@ -15,10 +15,10 @@ async function login({ userName, password }) {
   try {
     const user = await httpService.post(BASE_URL + 'login', {
       userName,
-      password,
-      
+      password,  
     })
     _setLoggedInUser(user)
+    console.log('user:', user)
     return user
   } catch (error) {
     console.log('Could not login')

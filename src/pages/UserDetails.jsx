@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react"
 import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 
 import { loadReviews } from "../store/actions/review.action.js"
 
@@ -34,5 +35,8 @@ export function UserDetails() {
        </div>
       ))}
      </div>
+     <div className="back-link">
+    <Link to={'/toy'}>Back</Link>
+    </div>
     </section>
 }

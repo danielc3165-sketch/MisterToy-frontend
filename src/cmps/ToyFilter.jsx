@@ -47,7 +47,7 @@ export function ToyFilter({ filterBy, onSetFilterBy }){
     if(!filterByToEdit) return
     const { txt,labels,sortBy } = filterByToEdit
 
-    return <section>
+    return <section className="toy-filter">
     <div className="search">
       <p>Search:</p> <input type="text" name='txt' value={txt} onChange={handleFilter} placeholder="Text"/>
       
