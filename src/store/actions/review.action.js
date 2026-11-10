@@ -6,7 +6,6 @@ import { ADD_REVIEW, REMOVE_REVIEW, SET_REVIEWS } from '../reducers/review.reduc
 export async function loadReviews(filterBy) {
 	try {
 		const reviews = await reviewService.query(filterBy)
-         console.log('A-reviews:', reviews)
 		store.dispatch({ type: SET_REVIEWS, reviews })
         return reviews
 	} catch (err) {

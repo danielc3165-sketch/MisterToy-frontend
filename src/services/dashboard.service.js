@@ -1,4 +1,4 @@
-import { toyService } from "./toy.service.local"
+import { toyService } from "./toy"
 
 const labels=['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle']
 

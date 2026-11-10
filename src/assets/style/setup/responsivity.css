@@ -2,11 +2,28 @@
 
 /* header    */
 .header .header-links {
-    display: none;
+    position: fixed;
+    display: grid;
+    top: 0;
+    gap: 1em;
+    right: 0;
+    width: 200px;
+    padding: 1em;
+    background-color:var(--gray2);
+}
+
+.header .off{
+   display: none;
 }
 
 .header .menu-btn{
     display:block;
+}
+
+.close-menu{
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 /* filter */
@@ -27,4 +44,15 @@
 .children-page{
     display: none;
 }
+}
+
+@media (width>700px){
+.header .header-links {
+    display: flex;
+}
+
+.close-menu{
+    display: none;
+}
+
 }

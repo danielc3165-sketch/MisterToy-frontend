@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 
-import { toyService } from "../services/toy.service.api"
+import { toyService } from "../services/toy"
 import { utilService } from "../services/util.service"
 
 import { useConfirmTabClose } from "../hooks/useConfirmTabClose"

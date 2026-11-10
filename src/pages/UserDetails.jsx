@@ -28,12 +28,13 @@ export function UserDetails() {
      <p>Name: {loggedInUser.fullName}</p>
      <p>ID: {loggedInUser._id}</p>
      <div className="user-reviews">
-      <h3>Reviews</h3>
-      {userReviews && userReviews.map(review => (
+         <h3>Reviews</h3>
+      {userReviews ? userReviews.map(review => (
        <div key={review._id} className="review">
-        <p>{review.txt}</p>
+        <p>Toy Name:{review.toy.name}</p>
+        <p>Text:{review.txt}</p>
        </div>
-      ))}
+      )) : <strong>No Reviews</strong> }
      </div>
      <div className="back-link">
     <Link to={'/toy'}>Back</Link>

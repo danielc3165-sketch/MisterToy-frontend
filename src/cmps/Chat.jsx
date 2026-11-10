@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { toyService } from '../services/toy.service.api'
+import { toyService } from '../services/toy'
 
 export function Chat({toyId}) {
     const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)

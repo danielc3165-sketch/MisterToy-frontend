@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom"
 
 import { loadReviews } from "../store/actions/review.action.js"
 
-import { toyService } from "../services/toy.service.api"
+import { toyService } from "../services/toy/index.js"
 import { reviewService } from "../services/review.service.js"
 import { utilService } from "../services/util.service"
 

@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { saveToy } from "../store/actions/toy.action"
 import { loadReviews } from "../store/actions/review.action.js"
 
-import { toyService } from "../services/toy.service.api"
+import { toyService } from "../services/toy/index.js"
 import { reviewService } from "../services/review.service.js"
 
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"

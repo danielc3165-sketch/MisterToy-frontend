@@ -1,17 +1,13 @@
 
-import { storageService } from "./async-storage.service.js"
-import { utilService} from "./util.service.js"
+import { storageService } from "../async-storage.service.js"
+import { utilService} from "../util.service.js"
 
 export const toyService = {
     query,
     getById,
     save,
     remove,
-    getEmptyToy,
 }
-
-const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 
-               'Outdoor', 'Battery Powered'] 
 
 const toysAlt = [
 { 
@@ -65,8 +61,6 @@ inStock: true,
 const STORAGE_KEY = 'toys'
 
 
-
-
 function query() {
     return storageService.query(STORAGE_KEY)
          .then(toys => { 
@@ -106,23 +100,7 @@ function save(toy) {
     }
 }
 
-function getEmptyToy(){
-    return { 
-imgUrl: 'hardcoded-url-for-now', 
-labels: _getToyLabels(), 
-inStock:utilService.getRandomIntInclusive(1, 2) === 1 ? true :false 
-}
-}
 
-function _getToyLabels(){
-    
-    const idx1 = utilService.getRandomIntInclusive(0, 3)
-    const idx2 = utilService.getRandomIntInclusive(4, 7)
 
-    return [labels[idx1],labels[idx2]]
-}
 
-function getDefaultFilter() {
-    return { txt: '', maxPrice: '' }
-}
 

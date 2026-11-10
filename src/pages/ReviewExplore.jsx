@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
 import { loadReviews } from "../store/actions/review.action.js"
 
 export  function ReviewExplore() {
