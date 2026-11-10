@@ -7,6 +7,8 @@ import { login, signup } from "../store/actions/user.action"
 import { userService } from "../services/user.service.api"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service" 
 
+import { ImgUploader } from "../cmps/ImgUploader"
+
 export function LoginSignup() {
 
     const [ isSignup,setIsSignup] =  useState(false)
@@ -58,6 +60,7 @@ export function LoginSignup() {
     {isSignup && <input type="text" name="fullName" value={credentials.fullName} onChange={handleCredentials} placeholder="Full Name"/>}
     <input type="password" name="password" value={credentials.password} onChange={handleCredentials} placeholder="Password" />
     </div>
+    {isSignup && <ImgUploader />}
     <button>{isSignup ? 'Signup' : 'Login'}</button>
  
     </form>

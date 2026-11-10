@@ -9,10 +9,10 @@ export function ToyList({toys, onRemoveToy, loggedInUser}){
 
         <div className="li-btns">
             <Link to={`/toy/${toy._id}`}><button>Details</button></Link>
-            {loggedInUser&&loggedInUser.isAdmin && (
+            {loggedInUser && loggedInUser.isAdmin && (
                 <Link to={`/toy/edit/${toy._id}`}><button>Edit</button></Link>
             )}
-            {loggedInUser&&loggedInUser.isAdmin && (
+            {loggedInUser && loggedInUser.isAdmin && (
                 <button onClick={()=>onRemoveToy(toy._id)}>Delete</button>
             )}
         </div>
