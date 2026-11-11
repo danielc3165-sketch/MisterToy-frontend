@@ -17,7 +17,7 @@ export function ToyIndex(){
     
     const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
     const toys = useSelector(storeState => storeState.toyModule.toys) 
-    
+
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isOnline = useOnlineStatus()
     

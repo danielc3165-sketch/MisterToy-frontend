@@ -14,14 +14,17 @@ export function LoginSignup() {
     const [ isSignup,setIsSignup] =  useState(false)
     const [ credentials,setCredentials ] = useState([userService.getEmptyCredentials()])
 
-    
-    //console.log('L',loggedInUser)
     const navigate = useNavigate()
 
     function handleCredentials({target}){
       const { value, name } = target
       setCredentials(prev=>({...prev,[name]:value}))
     }
+
+    function onUploaded(imgUrl) {
+        setCredentials({ ...credentials, imgUrl })
+    }
+
 
     function onSubmit(ev){
        ev.preventDefault()
@@ -60,7 +63,7 @@ export function LoginSignup() {
     {isSignup && <input type="text" name="fullName" value={credentials.fullName} onChange={handleCredentials} placeholder="Full Name"/>}
     <input type="password" name="password" value={credentials.password} onChange={handleCredentials} placeholder="Password" />
     </div>
-    {isSignup && <ImgUploader />}
+    {isSignup && <ImgUploader onUploaded={onUploaded} />}
     <button>{isSignup ? 'Signup' : 'Login'}</button>
  
     </form>

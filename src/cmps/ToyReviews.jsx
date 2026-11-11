@@ -25,6 +25,7 @@ export function ToyReviews({ toyReviews, toyId, loadToyReviews }) {
     return <section className="toy-reviews">
            <h2>Reviews</h2>
     <form onSubmit={sendReview}>
+         <button className="btn">Send</button>
                     <input
                         type="text"
                         value={currReview.txt}
@@ -32,13 +33,14 @@ export function ToyReviews({ toyReviews, toyId, loadToyReviews }) {
                         placeholder="Type a review..."
                         autoComplete="off"
                     />
-                    <button className="btn">Send</button>
                 </form>
+                <ul className="reviews-list">
     {toyReviews && toyReviews.map(review => (
         <div key={review._id} className="review">
-          <h4>{review.user?.fullName}</h4>
+          <h3>{review.user?.fullName}</h3>
           <p>{review.txt}</p>
         </div>
       ))}
+      </ul>
     </section>
 }

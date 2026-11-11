@@ -60,3 +60,8 @@ object {
 a.active {
   text-decoration: underline;
 }
+
+input{
+  height: 28px;
+  border-radius: 5px;
+}

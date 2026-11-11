@@ -12,7 +12,9 @@ export const toyService = {
 
 
 async function query(filterBy) {
-    return httpService.get('toy',filterBy) 
+    const toys = await httpService.get('toy',filterBy) 
+    console.log('toys',toys)
+    return toys
 }
 
 

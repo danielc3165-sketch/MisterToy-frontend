@@ -4,7 +4,8 @@ export const uploadService = {
 
 async function uploadImg(ev) {
 	const CLOUD_NAME = 'z6rg2bwn'
-	const UPLOAD_PRESET = 'stavs_preset'
+	const UPLOAD_PRESET = 'Daniel_Img'
+
 	const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
 
 	const formData = new FormData()
@@ -18,7 +19,7 @@ async function uploadImg(ev) {
 		const res = await fetch(UPLOAD_URL, { method: 'POST', body: formData })
 		
 		const imgData = await res.json()
-		console.log('resD:',imgData)
+		//console.log('resD:',imgData)
 		return imgData
 	} catch (err) {
 		console.error(err)

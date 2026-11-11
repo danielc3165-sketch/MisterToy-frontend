@@ -22,19 +22,26 @@ export function UserDetails() {
     }
 
     if (!userReviews) return <div>Loading...</div>
-
+    
     return <section className="user-details">
      <h2>Profile</h2>
-     <p>Name: {loggedInUser.fullName}</p>
-     <p>ID: {loggedInUser._id}</p>
+     <p><strong>Name:</strong> {loggedInUser.fullName}</p>
+     <p><strong>ID:</strong> {loggedInUser._id}</p>
+     
+     {loggedInUser.imgUrl ? 
+     <img src={loggedInUser.imgUrl} alt="" max-width={500} max-height={400} />
+     : <p style={{margin:100,fontWeight:'bold'}}>No Img</p>}
+     
      <div className="user-reviews">
          <h3>Reviews</h3>
-      {userReviews ? userReviews.map(review => (
-       <div key={review._id} className="review">
-        <p>Toy Name:{review.toy.name}</p>
-        <p>Text:{review.txt}</p>
-       </div>
-      )) : <strong>No Reviews</strong> }
+      <ul className="reviews-list">
+      {userReviews.length!=0 ? userReviews.map(review => (
+       <li key={review._id} className="review">
+        <p><strong>Toy:</strong> {review.toy.name}</p>
+        <p>{review.txt}</p>
+       </li>
+       )) : <strong style={{gridColumn: 2, marginTop:20}}>No Reviews</strong>}
+      </ul>
      </div>
      <div className="back-link">
     <Link to={'/toy'}>Back</Link>

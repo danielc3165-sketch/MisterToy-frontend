@@ -18,14 +18,14 @@ export  function ReviewExplore() {
 
     return <section className="review-explore">
         <h2>Edit Reviews</h2>
-        <div className="reviews-list">
+        <ul className="reviews-list">
             {reviews.map(review => (
                 <div key={review._id} className="review-item">
-                    <h3>{review.user?.fullName}</h3>
-                    <p>{review.toy?.name}</p>
+                    <h3> {review.user?.fullName}</h3>
+                    <p><strong>Toy:</strong> {review.toy?.name}</p>
                     <p>{review.txt}</p>
                 </div>
             ))}
-        </div>
+        </ul>
     </section>
 }

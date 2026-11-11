@@ -57,16 +57,17 @@ export function Chat({toyId}) {
                     </div>
                 ))}
             </div>
-            <div className="chat-input">
+            <div>
                 <form onSubmit={sendMsg}>
+                    <button className="btn">Send</button>
                     <input
                         type="text"
+                        className="chat-input"
                         value={currMsg.txt}
                         onChange={ev => setCurrMsg({...currMsg, txt: ev.target.value})}
                         placeholder="Type a message..."
                         autoComplete="off"
                     />
-                    <button className="btn">Send</button>
                 </form>
             </div>
         </section>

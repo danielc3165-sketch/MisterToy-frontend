@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 import { logout } from "../store/actions/user.action"
@@ -7,8 +8,19 @@ export function AppHeader(){
     const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
     const [ smallMenuOn,setSmallMenuOn ] = useState(false)
     
+    const navigate = useNavigate()
+
+    async function onLogout(){
+        await logout()
+        navigate('/login')
+    }
+
     return <div className="header">
-        <h2>mr. Toy</h2>
+
+        <img style={{marginBlock:20}}
+        src="https://res.cloudinary.com/z6rg2bwn/image/upload/v1794373753/toy-logo.png" 
+        alt="" />
+
         <div className={smallMenuOn ? 'header-links' : 'header-links off'} >
             <button className="close-menu" onClick={()=>setSmallMenuOn(false)}>X</button>
             <Link to={'/'}>Home</Link>
@@ -19,10 +31,10 @@ export function AppHeader(){
                 <Link to={'/review'}>Reviews</Link>
             )}
             {loggedInUser && (
-                <Link to={`/user/${loggedInUser._id}`}>Profile</Link>
+                <Link to={`/user/${loggedInUser._id}`} style={{color:'#0e4bbb'}}>Profile</Link>
             )}
             {loggedInUser ? (
-                <a className="login-color" onClick={logout}>
+                <a style={{color:'#00b1ff'}} onClick={onLogout}>
                     Logout
                 </a>
             ) : (

@@ -1,7 +1,7 @@
 .fancy-box{
     height: 100vh;
     width: 300px;
-    padding: 2em;
+    padding: 1.5em;
     background-color: var(--gray1);
 }
 
@@ -31,4 +31,8 @@
         margin: 0;
     }
     }   
+}
+
+.chat-input{
+    height: 28px;
 }
