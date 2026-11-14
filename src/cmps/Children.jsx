@@ -1,17 +1,22 @@
 import { Chat } from "./Chat"
 
 import { useState } from "react"
+import { sendTopic } from "../services/socket.service"
 
 export function Children({toyId}) {
  
    const [ chatOn,setChatOn ] = useState(false)
+
+   function onChat(){
+     sendTopic(toyId)
+   }
 
   return (
     <section className="children-page">
 
       
       <div className="fancy-box">
-      <button className="chat-btn" onClick={()=>setChatOn(!chatOn)}>{chatOn ? 'Close' : 'Chat'}</button>
+      <button className="chat-btn" onClick={()=>{setChatOn(!chatOn),onChat()}}>{chatOn ? 'Close' : 'Chat'}</button>
       
 
       {chatOn && <FancyBox title="Hi" toyId={toyId}>

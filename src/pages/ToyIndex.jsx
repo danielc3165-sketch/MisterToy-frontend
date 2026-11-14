@@ -24,8 +24,8 @@ export function ToyIndex(){
     useEffectUpdate(()=>{
        
       loadToys(filterBy)
-    },[filterBy])
 
+    },[filterBy])
     
     async function onRemoveToy(toyId) {
         try{
