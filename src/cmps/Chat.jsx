@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { toyService } from '../services/toy'
+import { utilService } from '../services/util.service'
 
-import { socket,sendMsg } from '../services/socket.service'
+import { socket, sendMsg, sendTypingOn, sendTypingOff } from '../services/socket.service'
 
 export function Chat({toyId}) {
     const loggedInUser = useSelector(storeState => storeState.userModule.loggedInUser)
@@ -10,7 +11,9 @@ export function Chat({toyId}) {
     
     const [ msgs,setMsgs ] = useState([])
     const [ currMsg, setCurrMsg ] = useState(toyService.getEmptyMsg())
+    const [ typingUser,setTypingUser ] = useState(null)
     
+    const debouncedStopTyping = useRef(utilService.debounce(sendTypingOff,2000))
     //console.log('toyId',toyId)
     //console.log('msgs',msgs)
 
@@ -23,8 +26,10 @@ export function Chat({toyId}) {
 
     useEffect(() => {
         socket.on('chat-msg',addMsg)
+        socket.on('typing', addTyping)
         return () => {
-        //socket.off('chat-msg',addMsg)
+        socket.off('chat-msg',addMsg)
+        socket.off('typing', addTyping)
         }
     }, [])
 
@@ -51,7 +56,14 @@ export function Chat({toyId}) {
 
     function onInputChange(ev){
        setCurrMsg({...currMsg, txt: ev.target.value})
-       
+       if(!loggedInUser) return
+       sendTypingOn(loggedInUser.fullName)
+       debouncedStopTyping.current(loggedInUser.fullName)
+    }
+
+    function addTyping(user){
+        console.log('TU',user)
+        setTypingUser(user)
     }
 
     async function addMsg(msg) {
@@ -77,6 +89,7 @@ export function Chat({toyId}) {
                 ))}
             </div>
             <div>
+                {typingUser?.isTyping && <p>{typingUser.fullName} is typing </p>}
                 <form onSubmit={onSubmit}>
                     <button className="btn">Send</button>
                     <input

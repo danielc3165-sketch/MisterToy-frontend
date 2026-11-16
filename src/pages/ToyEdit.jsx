@@ -8,6 +8,8 @@ import { loadReviews } from "../store/actions/review.action.js"
 import { toyService } from "../services/toy/index.js"
 import { reviewService } from "../services/review.service.js"
 
+import { toyAdd, toyUpdate } from "../services/socket.service.js"
+
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service"
 
 export function ToyEdit(){
@@ -44,6 +46,8 @@ export function ToyEdit(){
             try{
             await saveToy(toy)  
             showSuccessMsg('Toy Update!')
+            if(!toy._id) toyAdd(toy.name)
+            else toyUpdate(toy.name)    
             navigate('/toy')
             }
             catch (err) {

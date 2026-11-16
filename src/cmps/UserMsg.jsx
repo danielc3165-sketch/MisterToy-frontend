@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 
-import { eventBusService } from "../services/event-bus.service.js"
+import { eventBusService, showSuccessMsg } from "../services/event-bus.service.js"
+
+import { socket } from '../services/socket.service.js'
+
 
 export function UserMsg() {
 
@@ -18,6 +21,16 @@ export function UserMsg() {
         })
         return unsubscribe
     }, [])
+
+    useEffect(() => {
+        
+           socket.on('store-change',change =>{
+            console.log('CH',change)
+            showSuccessMsg(`${change.toyName} is ${change.type}`)
+           })
+    }, [])
+
+    
 
     function closeMsg() {
         setMsg(null)

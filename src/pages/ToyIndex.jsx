@@ -6,10 +6,13 @@ import { ToyList } from "../cmps/ToyList.jsx"
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service.js"
 
+import { toyService } from "../services/toy/index.js"
 import { loadToys, removeToy, setFilterBy } from "../store/actions/toy.action.js" 
 
 import { useOnlineStatus } from "../hooks/useOnlineStatus.js"
 import { useEffectUpdate } from "../hooks/useEffectUpdate.js" 
+
+import { toyRemoved } from "../services/socket.service.js"
 
 // import { toyService } from "../services/toy.service.local.js"
 
@@ -29,8 +32,11 @@ export function ToyIndex(){
     
     async function onRemoveToy(toyId) {
         try{
+
+        const toy= await toyService.getById(toyId)
         await removeToy(toyId)
-            showSuccessMsg('Toy deleted')
+        toyRemoved(toy.name)
+        showSuccessMsg('Toy deleted')
         }
         catch (err) {
             showErrorMsg('Cannot delete toy')
